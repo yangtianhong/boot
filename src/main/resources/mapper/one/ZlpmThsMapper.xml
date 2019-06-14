@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.boot.one.mapper.ZlpmThsMapper" >
+  <resultMap id="BaseResultMap" type="com.tian.boot.common.model.ZlpmThs" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="current_price" property="currentPrice" jdbcType="DOUBLE" />
+    <result column="change_rate" property="changeRate" jdbcType="DOUBLE" />
+    <result column="zl_lv_five" property="zlLvFive" jdbcType="DOUBLE" />
+    <result column="zl_lv" property="zlLv" jdbcType="DOUBLE" />
+    <result column="pm1" property="pm1" jdbcType="INTEGER" />
+    <result column="change_rate_five" property="changeRateFive" jdbcType="DOUBLE" />
+    <result column="pm1_fiv" property="pm1Fiv" jdbcType="DOUBLE" />
+    <result column="change_rate_ten" property="changeRateTen" jdbcType="DOUBLE" />
+    <result column="zl_lv_ten" property="zlLvTen" jdbcType="DOUBLE" />
+    <result column="pm1_ten" property="pm1Ten" jdbcType="DOUBLE" />
+    <result column="bankuai" property="bankuai" jdbcType="VARCHAR" />
+    <result column="today" property="today" jdbcType="VARCHAR" />
+    <result column="cdate" property="cdate" jdbcType="TIMESTAMP" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="first_pm" property="firstPm" jdbcType="INTEGER" />
+    <result column="first_zl" property="firstZl" jdbcType="DOUBLE" />
+    <result column="pm_num" property="pmNum" jdbcType="INTEGER" />
+    <result column="pm_num_first" property="pmNumFirst" jdbcType="INTEGER" />
+    <result column="zl_lv_change" property="zlLvChange" jdbcType="DOUBLE" />
+    <result column="zl_lv_change_first" property="zlLvChangeFirst" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, code, name, current_price, change_rate, zl_lv_five, zl_lv, pm1, change_rate_five, 
+    pm1_fiv, change_rate_ten, zl_lv_ten, pm1_ten, bankuai, today, cdate, num, pm_num, 
+    pm_num_first, zl_lv_change, zl_lv_change_first,first_pm,first_zl
+  </sql>
+ <select id="queryPmNum" resultType="java.lang.Integer"  parameterType="com.tian.boot.common.model.ZlpmThs">
+  select max(num) as pmNum from zlpm_ths where today=#{today}
+ </select> 
+ 
+ 
+   <select id="queryByNumAndToday" resultMap="BaseResultMap" parameterType="com.tian.boot.common.model.ZlpmThs" >
+    select 
+    <include refid="Base_Column_List" />
+    from zlpm_ths
+    where today=#{today} and num=#{num}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from zlpm_ths
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from zlpm_ths
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tian.boot.common.model.ZlpmThs" >
+    insert into zlpm_ths (id, code, name, 
+      current_price, change_rate, zl_lv_five, 
+      zl_lv, pm1, change_rate_five, 
+      pm1_fiv, change_rate_ten, zl_lv_ten, 
+      pm1_ten, bankuai, today, 
+      cdate, num, pm_num, 
+      pm_num_first, zl_lv_change, zl_lv_change_first
+      )
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{currentPrice,jdbcType=DOUBLE}, #{changeRate,jdbcType=DOUBLE}, #{zlLvFive,jdbcType=DOUBLE}, 
+      #{zlLv,jdbcType=DOUBLE}, #{pm1,jdbcType=INTEGER}, #{changeRateFive,jdbcType=DOUBLE}, 
+      #{pm1Fiv,jdbcType=DOUBLE}, #{changeRateTen,jdbcType=DOUBLE}, #{zlLvTen,jdbcType=DOUBLE}, 
+      #{pm1Ten,jdbcType=DOUBLE}, #{bankuai,jdbcType=VARCHAR}, #{today,jdbcType=VARCHAR}, 
+      #{cdate,jdbcType=TIMESTAMP}, #{num,jdbcType=INTEGER}, #{pmNum,jdbcType=INTEGER}, 
+      #{pmNumFirst,jdbcType=INTEGER}, #{zlLvChange,jdbcType=DOUBLE}, #{zlLvChangeFirst,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tian.boot.common.model.ZlpmThs" >
+    insert into zlpm_ths
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="currentPrice != null" >
+        current_price,
+      </if>
+      <if test="changeRate != null" >
+        change_rate,
+      </if>
+      <if test="zlLvFive != null" >
+        zl_lv_five,
+      </if>
+      <if test="zlLv != null" >
+        zl_lv,
+      </if>
+      <if test="pm1 != null" >
+        pm1,
+      </if>
+      <if test="changeRateFive != null" >
+        change_rate_five,
+      </if>
+      <if test="pm1Fiv != null" >
+        pm1_fiv,
+      </if>
+      <if test="changeRateTen != null" >
+        change_rate_ten,
+      </if>
+      <if test="zlLvTen != null" >
+        zl_lv_ten,
+      </if>
+      <if test="pm1Ten != null" >
+        pm1_ten,
+      </if>
+      <if test="bankuai != null" >
+        bankuai,
+      </if>
+      <if test="today != null" >
+        today,
+      </if>
+      <if test="cdate != null" >
+        cdate,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="pmNum != null" >
+        pm_num,
+      </if>
+      <if test="pmNumFirst != null" >
+        pm_num_first,
+      </if>
+      <if test="zlLvChange != null" >
+        zl_lv_change,
+      </if>
+      <if test="zlLvChangeFirst != null" >
+        zl_lv_change_first,
+      </if>
+       <if test="firstPm != null" >
+        first_pm,
+      </if>
+      <if test="firstZl != null" >
+        first_zl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="currentPrice != null" >
+        #{currentPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="changeRate != null" >
+        #{changeRate,jdbcType=DOUBLE},
+      </if>
+      <if test="zlLvFive != null" >
+        #{zlLvFive,jdbcType=DOUBLE},
+      </if>
+      <if test="zlLv != null" >
+        #{zlLv,jdbcType=DOUBLE},
+      </if>
+      <if test="pm1 != null" >
+        #{pm1,jdbcType=INTEGER},
+      </if>
+      <if test="changeRateFive != null" >
+        #{changeRateFive,jdbcType=DOUBLE},
+      </if>
+      <if test="pm1Fiv != null" >
+        #{pm1Fiv,jdbcType=DOUBLE},
+      </if>
+      <if test="changeRateTen != null" >
+        #{changeRateTen,jdbcType=DOUBLE},
+      </if>
+      <if test="zlLvTen != null" >
+        #{zlLvTen,jdbcType=DOUBLE},
+      </if>
+      <if test="pm1Ten != null" >
+        #{pm1Ten,jdbcType=DOUBLE},
+      </if>
+      <if test="bankuai != null" >
+        #{bankuai,jdbcType=VARCHAR},
+      </if>
+      <if test="today != null" >
+        #{today,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null" >
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="pmNum != null" >
+        #{pmNum,jdbcType=INTEGER},
+      </if>
+      <if test="pmNumFirst != null" >
+        #{pmNumFirst,jdbcType=INTEGER},
+      </if>
+      <if test="zlLvChange != null" >
+        #{zlLvChange,jdbcType=DOUBLE},
+      </if>
+      <if test="zlLvChangeFirst != null" >
+        #{zlLvChangeFirst,jdbcType=DOUBLE},
+      </if>
+       <if test="firstPm != null" >
+        #{firstPm},
+      </if>
+      <if test="firstZl != null" >
+        #{firstZl},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tian.boot.common.model.ZlpmThs" >
+    update zlpm_ths
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="currentPrice != null" >
+        current_price = #{currentPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="changeRate != null" >
+        change_rate = #{changeRate,jdbcType=DOUBLE},
+      </if>
+      <if test="zlLvFive != null" >
+        zl_lv_five = #{zlLvFive,jdbcType=DOUBLE},
+      </if>
+      <if test="zlLv != null" >
+        zl_lv = #{zlLv,jdbcType=DOUBLE},
+      </if>
+      <if test="pm1 != null" >
+        pm1 = #{pm1,jdbcType=INTEGER},
+      </if>
+      <if test="changeRateFive != null" >
+        change_rate_five = #{changeRateFive,jdbcType=DOUBLE},
+      </if>
+      <if test="pm1Fiv != null" >
+        pm1_fiv = #{pm1Fiv,jdbcType=DOUBLE},
+      </if>
+      <if test="changeRateTen != null" >
+        change_rate_ten = #{changeRateTen,jdbcType=DOUBLE},
+      </if>
+      <if test="zlLvTen != null" >
+        zl_lv_ten = #{zlLvTen,jdbcType=DOUBLE},
+      </if>
+      <if test="pm1Ten != null" >
+        pm1_ten = #{pm1Ten,jdbcType=DOUBLE},
+      </if>
+      <if test="bankuai != null" >
+        bankuai = #{bankuai,jdbcType=VARCHAR},
+      </if>
+      <if test="today != null" >
+        today = #{today,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null" >
+        cdate = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="pmNum != null" >
+        pm_num = #{pmNum,jdbcType=INTEGER},
+      </if>
+      <if test="pmNumFirst != null" >
+        pm_num_first = #{pmNumFirst,jdbcType=INTEGER},
+      </if>
+      <if test="zlLvChange != null" >
+        zl_lv_change = #{zlLvChange,jdbcType=DOUBLE},
+      </if>
+      <if test="zlLvChangeFirst != null" >
+        zl_lv_change_first = #{zlLvChangeFirst,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tian.boot.common.model.ZlpmThs" >
+    update zlpm_ths
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      current_price = #{currentPrice,jdbcType=DOUBLE},
+      change_rate = #{changeRate,jdbcType=DOUBLE},
+      zl_lv_five = #{zlLvFive,jdbcType=DOUBLE},
+      zl_lv = #{zlLv,jdbcType=DOUBLE},
+      pm1 = #{pm1,jdbcType=INTEGER},
+      change_rate_five = #{changeRateFive,jdbcType=DOUBLE},
+      pm1_fiv = #{pm1Fiv,jdbcType=DOUBLE},
+      change_rate_ten = #{changeRateTen,jdbcType=DOUBLE},
+      zl_lv_ten = #{zlLvTen,jdbcType=DOUBLE},
+      pm1_ten = #{pm1Ten,jdbcType=DOUBLE},
+      bankuai = #{bankuai,jdbcType=VARCHAR},
+      today = #{today,jdbcType=VARCHAR},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      num = #{num,jdbcType=INTEGER},
+      pm_num = #{pmNum,jdbcType=INTEGER},
+      pm_num_first = #{pmNumFirst,jdbcType=INTEGER},
+      zl_lv_change = #{zlLvChange,jdbcType=DOUBLE},
+      zl_lv_change_first = #{zlLvChangeFirst,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

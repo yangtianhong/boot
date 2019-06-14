@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.boot.one.mapper.ZmoneyDfcfMapper" >
+  <resultMap id="BaseResultMap" type="com.tian.boot.common.model.ZmoneyDfcf" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="current_price" property="currentPrice" jdbcType="DOUBLE" />
+    <result column="change_rate" property="changeRate" jdbcType="DOUBLE" />
+    <result column="flow_money" property="flowMoney" jdbcType="DOUBLE" />
+    <result column="flow_rate" property="flowRate" jdbcType="DOUBLE" />
+    <result column="large_big_money" property="largeBigMoney" jdbcType="DOUBLE" />
+    <result column="large_big_rate" property="largeBigRate" jdbcType="DOUBLE" />
+    <result column="big_money" property="bigMoney" jdbcType="DOUBLE" />
+    <result column="big_rate" property="bigRate" jdbcType="DOUBLE" />
+    <result column="mid_money" property="midMoney" jdbcType="DOUBLE" />
+    <result column="mid_rate" property="midRate" jdbcType="DOUBLE" />
+    <result column="sma_money" property="smaMoney" jdbcType="DOUBLE" />
+    <result column="sma_rate" property="smaRate" jdbcType="DOUBLE" />
+    <result column="today" property="today" jdbcType="VARCHAR" />
+    <result column="cdate" property="cdate" jdbcType="TIMESTAMP" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="flow_money_first" property="flowMoneyFirst" jdbcType="DOUBLE" />
+    <result column="flow_rate_first" property="flowRateFirst" jdbcType="DOUBLE" />
+    <result column="large_big_money_first" property="largeBigMoneyFirst" jdbcType="DOUBLE" />
+    <result column="large_big_rate_first" property="largeBigRateFirst" jdbcType="DOUBLE" />
+    <result column="big_money_first" property="bigMoneyFirst" jdbcType="DOUBLE" />
+    <result column="big_rate_first" property="bigRateFirst" jdbcType="DOUBLE" />
+    <result column="flow_money_change" property="flowMoneyChange" jdbcType="DOUBLE" />
+    <result column="flow_rate_change" property="flowRateChange" jdbcType="DOUBLE" />
+    <result column="large_big_money_change" property="largeBigMoneyChange" jdbcType="DOUBLE" />
+    <result column="large_big_rate_change" property="largeBigRateChange" jdbcType="DOUBLE" />
+    <result column="big_money_change" property="bigMoneyChange" jdbcType="DOUBLE" />
+    <result column="big_rate_change" property="bigRateChange" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, code, name, current_price, change_rate, flow_money, flow_rate, large_big_money, 
+    large_big_rate, big_money, big_rate, mid_money, mid_rate, sma_money, sma_rate, today, 
+    cdate, num, flow_money_first, flow_rate_first, large_big_money_first, large_big_rate_first, 
+    big_money_first, big_rate_first, flow_money_change, flow_rate_change, large_big_money_change, 
+    large_big_rate_change, big_money_change, big_rate_change
+  </sql>
+  <select id="queryByNumAndToday" resultMap="BaseResultMap" parameterType="com.tian.boot.common.model.ZmoneyDfcf" >
+    select 
+    <include refid="Base_Column_List" />
+    from zmoney_dfcf
+    where today=#{today} and num=#{num}
+  </select>
+   <select id="queryPmNum" resultType="java.lang.Integer"  parameterType="com.tian.boot.common.model.ZmoneyDfcf">
+  select max(num) as pmNum from zmoney_dfcf where today=#{today}
+ </select> 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from zmoney_dfcf
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from zmoney_dfcf
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tian.boot.common.model.ZmoneyDfcf" >
+    insert into zmoney_dfcf (id, code, name, 
+      current_price, change_rate, flow_money, 
+      flow_rate, large_big_money, large_big_rate, 
+      big_money, big_rate, mid_money, 
+      mid_rate, sma_money, sma_rate, 
+      today, cdate, num, 
+      flow_money_first, flow_rate_first, large_big_money_first, 
+      large_big_rate_first, big_money_first, big_rate_first, 
+      flow_money_change, flow_rate_change, large_big_money_change, 
+      large_big_rate_change, big_money_change, big_rate_change
+      )
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{currentPrice,jdbcType=DOUBLE}, #{changeRate,jdbcType=DOUBLE}, #{flowMoney,jdbcType=DOUBLE}, 
+      #{flowRate,jdbcType=DOUBLE}, #{largeBigMoney,jdbcType=DOUBLE}, #{largeBigRate,jdbcType=DOUBLE}, 
+      #{bigMoney,jdbcType=DOUBLE}, #{bigRate,jdbcType=DOUBLE}, #{midMoney,jdbcType=DOUBLE}, 
+      #{midRate,jdbcType=DOUBLE}, #{smaMoney,jdbcType=DOUBLE}, #{smaRate,jdbcType=DOUBLE}, 
+      #{today,jdbcType=VARCHAR}, #{cdate,jdbcType=TIMESTAMP}, #{num,jdbcType=INTEGER}, 
+      #{flowMoneyFirst,jdbcType=DOUBLE}, #{flowRateFirst,jdbcType=DOUBLE}, #{largeBigMoneyFirst,jdbcType=DOUBLE}, 
+      #{largeBigRateFirst,jdbcType=DOUBLE}, #{bigMoneyFirst,jdbcType=DOUBLE}, #{bigRateFirst,jdbcType=DOUBLE}, 
+      #{flowMoneyChange,jdbcType=DOUBLE}, #{flowRateChange,jdbcType=DOUBLE}, #{largeBigMoneyChange,jdbcType=DOUBLE}, 
+      #{largeBigRateChange,jdbcType=DOUBLE}, #{bigMoneyChange,jdbcType=DOUBLE}, #{bigRateChange,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tian.boot.common.model.ZmoneyDfcf" >
+    insert into zmoney_dfcf
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="currentPrice != null" >
+        current_price,
+      </if>
+      <if test="changeRate != null" >
+        change_rate,
+      </if>
+      <if test="flowMoney != null" >
+        flow_money,
+      </if>
+      <if test="flowRate != null" >
+        flow_rate,
+      </if>
+      <if test="largeBigMoney != null" >
+        large_big_money,
+      </if>
+      <if test="largeBigRate != null" >
+        large_big_rate,
+      </if>
+      <if test="bigMoney != null" >
+        big_money,
+      </if>
+      <if test="bigRate != null" >
+        big_rate,
+      </if>
+      <if test="midMoney != null" >
+        mid_money,
+      </if>
+      <if test="midRate != null" >
+        mid_rate,
+      </if>
+      <if test="smaMoney != null" >
+        sma_money,
+      </if>
+      <if test="smaRate != null" >
+        sma_rate,
+      </if>
+      <if test="today != null" >
+        today,
+      </if>
+      <if test="cdate != null" >
+        cdate,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="flowMoneyFirst != null" >
+        flow_money_first,
+      </if>
+      <if test="flowRateFirst != null" >
+        flow_rate_first,
+      </if>
+      <if test="largeBigMoneyFirst != null" >
+        large_big_money_first,
+      </if>
+      <if test="largeBigRateFirst != null" >
+        large_big_rate_first,
+      </if>
+      <if test="bigMoneyFirst != null" >
+        big_money_first,
+      </if>
+      <if test="bigRateFirst != null" >
+        big_rate_first,
+      </if>
+      <if test="flowMoneyChange != null" >
+        flow_money_change,
+      </if>
+      <if test="flowRateChange != null" >
+        flow_rate_change,
+      </if>
+      <if test="largeBigMoneyChange != null" >
+        large_big_money_change,
+      </if>
+      <if test="largeBigRateChange != null" >
+        large_big_rate_change,
+      </if>
+      <if test="bigMoneyChange != null" >
+        big_money_change,
+      </if>
+      <if test="bigRateChange != null" >
+        big_rate_change,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="currentPrice != null" >
+        #{currentPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="changeRate != null" >
+        #{changeRate,jdbcType=DOUBLE},
+      </if>
+      <if test="flowMoney != null" >
+        #{flowMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="flowRate != null" >
+        #{flowRate,jdbcType=DOUBLE},
+      </if>
+      <if test="largeBigMoney != null" >
+        #{largeBigMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="largeBigRate != null" >
+        #{largeBigRate,jdbcType=DOUBLE},
+      </if>
+      <if test="bigMoney != null" >
+        #{bigMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="bigRate != null" >
+        #{bigRate,jdbcType=DOUBLE},
+      </if>
+      <if test="midMoney != null" >
+        #{midMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="midRate != null" >
+        #{midRate,jdbcType=DOUBLE},
+      </if>
+      <if test="smaMoney != null" >
+        #{smaMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="smaRate != null" >
+        #{smaRate,jdbcType=DOUBLE},
+      </if>
+      <if test="today != null" >
+        #{today,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null" >
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="flowMoneyFirst != null" >
+        #{flowMoneyFirst,jdbcType=DOUBLE},
+      </if>
+      <if test="flowRateFirst != null" >
+        #{flowRateFirst,jdbcType=DOUBLE},
+      </if>
+      <if test="largeBigMoneyFirst != null" >
+        #{largeBigMoneyFirst,jdbcType=DOUBLE},
+      </if>
+      <if test="largeBigRateFirst != null" >
+        #{largeBigRateFirst,jdbcType=DOUBLE},
+      </if>
+      <if test="bigMoneyFirst != null" >
+        #{bigMoneyFirst,jdbcType=DOUBLE},
+      </if>
+      <if test="bigRateFirst != null" >
+        #{bigRateFirst,jdbcType=DOUBLE},
+      </if>
+      <if test="flowMoneyChange != null" >
+        #{flowMoneyChange,jdbcType=DOUBLE},
+      </if>
+      <if test="flowRateChange != null" >
+        #{flowRateChange,jdbcType=DOUBLE},
+      </if>
+      <if test="largeBigMoneyChange != null" >
+        #{largeBigMoneyChange,jdbcType=DOUBLE},
+      </if>
+      <if test="largeBigRateChange != null" >
+        #{largeBigRateChange,jdbcType=DOUBLE},
+      </if>
+      <if test="bigMoneyChange != null" >
+        #{bigMoneyChange,jdbcType=DOUBLE},
+      </if>
+      <if test="bigRateChange != null" >
+        #{bigRateChange,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tian.boot.common.model.ZmoneyDfcf" >
+    update zmoney_dfcf
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="currentPrice != null" >
+        current_price = #{currentPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="changeRate != null" >
+        change_rate = #{changeRate,jdbcType=DOUBLE},
+      </if>
+      <if test="flowMoney != null" >
+        flow_money = #{flowMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="flowRate != null" >
+        flow_rate = #{flowRate,jdbcType=DOUBLE},
+      </if>
+      <if test="largeBigMoney != null" >
+        large_big_money = #{largeBigMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="largeBigRate != null" >
+        large_big_rate = #{largeBigRate,jdbcType=DOUBLE},
+      </if>
+      <if test="bigMoney != null" >
+        big_money = #{bigMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="bigRate != null" >
+        big_rate = #{bigRate,jdbcType=DOUBLE},
+      </if>
+      <if test="midMoney != null" >
+        mid_money = #{midMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="midRate != null" >
+        mid_rate = #{midRate,jdbcType=DOUBLE},
+      </if>
+      <if test="smaMoney != null" >
+        sma_money = #{smaMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="smaRate != null" >
+        sma_rate = #{smaRate,jdbcType=DOUBLE},
+      </if>
+      <if test="today != null" >
+        today = #{today,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null" >
+        cdate = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="flowMoneyFirst != null" >
+        flow_money_first = #{flowMoneyFirst,jdbcType=DOUBLE},
+      </if>
+      <if test="flowRateFirst != null" >
+        flow_rate_first = #{flowRateFirst,jdbcType=DOUBLE},
+      </if>
+      <if test="largeBigMoneyFirst != null" >
+        large_big_money_first = #{largeBigMoneyFirst,jdbcType=DOUBLE},
+      </if>
+      <if test="largeBigRateFirst != null" >
+        large_big_rate_first = #{largeBigRateFirst,jdbcType=DOUBLE},
+      </if>
+      <if test="bigMoneyFirst != null" >
+        big_money_first = #{bigMoneyFirst,jdbcType=DOUBLE},
+      </if>
+      <if test="bigRateFirst != null" >
+        big_rate_first = #{bigRateFirst,jdbcType=DOUBLE},
+      </if>
+      <if test="flowMoneyChange != null" >
+        flow_money_change = #{flowMoneyChange,jdbcType=DOUBLE},
+      </if>
+      <if test="flowRateChange != null" >
+        flow_rate_change = #{flowRateChange,jdbcType=DOUBLE},
+      </if>
+      <if test="largeBigMoneyChange != null" >
+        large_big_money_change = #{largeBigMoneyChange,jdbcType=DOUBLE},
+      </if>
+      <if test="largeBigRateChange != null" >
+        large_big_rate_change = #{largeBigRateChange,jdbcType=DOUBLE},
+      </if>
+      <if test="bigMoneyChange != null" >
+        big_money_change = #{bigMoneyChange,jdbcType=DOUBLE},
+      </if>
+      <if test="bigRateChange != null" >
+        big_rate_change = #{bigRateChange,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tian.boot.common.model.ZmoneyDfcf" >
+    update zmoney_dfcf
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      current_price = #{currentPrice,jdbcType=DOUBLE},
+      change_rate = #{changeRate,jdbcType=DOUBLE},
+      flow_money = #{flowMoney,jdbcType=DOUBLE},
+      flow_rate = #{flowRate,jdbcType=DOUBLE},
+      large_big_money = #{largeBigMoney,jdbcType=DOUBLE},
+      large_big_rate = #{largeBigRate,jdbcType=DOUBLE},
+      big_money = #{bigMoney,jdbcType=DOUBLE},
+      big_rate = #{bigRate,jdbcType=DOUBLE},
+      mid_money = #{midMoney,jdbcType=DOUBLE},
+      mid_rate = #{midRate,jdbcType=DOUBLE},
+      sma_money = #{smaMoney,jdbcType=DOUBLE},
+      sma_rate = #{smaRate,jdbcType=DOUBLE},
+      today = #{today,jdbcType=VARCHAR},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      num = #{num,jdbcType=INTEGER},
+      flow_money_first = #{flowMoneyFirst,jdbcType=DOUBLE},
+      flow_rate_first = #{flowRateFirst,jdbcType=DOUBLE},
+      large_big_money_first = #{largeBigMoneyFirst,jdbcType=DOUBLE},
+      large_big_rate_first = #{largeBigRateFirst,jdbcType=DOUBLE},
+      big_money_first = #{bigMoneyFirst,jdbcType=DOUBLE},
+      big_rate_first = #{bigRateFirst,jdbcType=DOUBLE},
+      flow_money_change = #{flowMoneyChange,jdbcType=DOUBLE},
+      flow_rate_change = #{flowRateChange,jdbcType=DOUBLE},
+      large_big_money_change = #{largeBigMoneyChange,jdbcType=DOUBLE},
+      large_big_rate_change = #{largeBigRateChange,jdbcType=DOUBLE},
+      big_money_change = #{bigMoneyChange,jdbcType=DOUBLE},
+      big_rate_change = #{bigRateChange,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
